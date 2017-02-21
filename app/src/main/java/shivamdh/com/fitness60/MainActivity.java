@@ -15,13 +15,23 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-   @Override
+    NavigationView navigationView = null;
+    Toolbar toolbar = null;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //set the fragment initally
+        HomeFragment fragment = new HomeFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Fitness60");
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -59,9 +69,33 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_home) {
+            HomeFragment fragment = new HomeFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            toolbar.setTitle("Fitness60");
         } else if (id == R.id.nav_workouts) {
+            MyWorkoutFragment fragment = new MyWorkoutFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            toolbar.setTitle("My Workouts");
         } else if (id == R.id.nav_analysis) {
+            WorkoutAnalysisFragment fragment = new WorkoutAnalysisFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            toolbar.setTitle("Workout Analysis");
         } else if (id == R.id.nav_options) {
+            Options fragment = new Options();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+            toolbar.setTitle("Your Options");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
