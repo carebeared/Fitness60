@@ -20,8 +20,10 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View myView = inflater.inflate(R.layout.fragment_home_fragement, container, false);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_fragement, container, false);
+        return myView;
     }
 
 }

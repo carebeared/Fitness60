@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.Timer;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -23,7 +25,22 @@ public class Options extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        final RadioGroup radioGroup = (RadioGroup)getView().findViewById(R.id.timer_buttons);
+        View myView = inflater.inflate(R.layout.options, container, false);
+
+//        RadioGroup timer = (RadioGroup)getView().findViewById(R.id.timer_buttons);
+        RadioButton TimerYes = (RadioButton)myView.findViewById(R.id.TimerYes);
+        TimerYes.setChecked(true);
+        RadioButton TimerKm = (RadioButton)myView.findViewById(R.id.km_unit);
+        TimerKm.setChecked(true);
+        RadioButton TimerLbs = (RadioButton)myView.findViewById(R.id.lbs_unit);
+        TimerLbs.setChecked(true);
+
+//        final RadioGroup distanceUnits = (RadioGroup)getView().findViewById(R.id.units1_check);
+//        distanceUnits.check(R.id.km_unit);
+//        final RadioGroup weightUnits = (RadioGroup)getView().findViewById(R.id.units2_check);
+
+
+
 //        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 //            @Override
 //            public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -43,7 +60,7 @@ public class Options extends Fragment {
 
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.options, container, false);
+        return myView;
     }
 
 
