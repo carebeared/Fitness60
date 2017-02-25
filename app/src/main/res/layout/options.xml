@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="53dp"
     android:layout_height="fill_parent"
     android:layout_width="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,11 +19,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView3"
-            android:textSize="24sp"
+            android:textSize="27sp"
             android:textColor="?attr/colorPrimaryDark" />
 
         <TextView
-            android:text="Utilize a Timer"
+            android:text="@string/utilize_a_timer"
             android:layout_width="match_parent"
             android:id="@+id/textView6"
             android:translationY="6dp"
@@ -52,30 +52,107 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:text="Yes"
+                android:text="@string/yes"
                 android:layout_width="205dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/TimerYes"
-                android:layout_below="@+id/textView6"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_weight="1"
                 android:textColorLink="@android:color/holo_red_dark" />
 
             <RadioButton
-                android:text="No"
+                android:text="@string/no"
                 android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/TimerNo"
                 android:layout_marginRight="131dp"
                 android:layout_marginEnd="131dp"
-                android:layout_alignBaseline="@+id/TimerYes"
-                android:layout_alignBottom="@+id/TimerYes"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
                 android:translationX="30dp"
                 android:textColorLink="@android:color/holo_red_dark" />
         </RadioGroup>
+
+        <TextView
+            android:text="@string/units"
+            android:layout_width="match_parent"
+            android:id="@+id/check_units"
+            android:translationY="6dp"
+            android:textColor="?android:attr/colorActivatedHighlight"
+            android:layout_height="27dp"
+            android:textSize="18sp"
+            android:layout_below="@+id/timer_buttons"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/check_units"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
+            android:id="@+id/units1_check">
+
+            <RadioButton
+                android:text="@string/km"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/km_unit"
+                android:textColorLink="@android:color/holo_red_dark"/>
+
+            <RadioButton
+                android:text="@string/miles"
+                android:layout_width="93dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/miles_unit"
+                android:textColorLink="@android:color/holo_red_dark"
+                android:layout_marginLeft="54dp"
+                android:layout_marginStart="54dp"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:text="@string/units2"
+            android:layout_width="match_parent"
+            android:id="@+id/check_units2"
+            android:translationY="6dp"
+            android:textColor="?android:attr/colorActivatedHighlight"
+            android:layout_height="27dp"
+            android:textSize="18sp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="154dp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/check_units2"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
+            android:id="@+id/units2_check">
+
+            <RadioButton
+                android:text="@string/lbs"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbs_unit"
+                android:textColorLink="@android:color/holo_red_dark"/>
+
+            <RadioButton
+                android:text="@string/kg"
+                android:layout_width="93dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/kg_unit"
+                android:textColorLink="@android:color/holo_red_dark"
+                android:layout_marginLeft="54dp"
+                android:layout_marginStart="54dp"/>
+
+
+            </RadioGroup>
+
 
     </RelativeLayout>
 </ScrollView>
