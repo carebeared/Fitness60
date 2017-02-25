@@ -22,4 +22,12 @@
             android:title="@string/options" />
     </group>
 
+    <item android:title=""/>
+    <item android:title=""/>
+    <item android:title=""/>
+    <item android:title=""/>
+    <item android:title="@string/app_by"
+        android:checkable="false" />
+    <item android:title="@string/name"/>
+
 </menu>
