@@ -14,11 +14,11 @@
             android:title="@string/my_workouts" />
         <item
             android:id="@+id/nav_analysis"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/workout_analysis_logo"
             android:title="@string/workout_analysis" />
         <item
             android:id="@+id/nav_options"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/settings_logo"
             android:title="@string/options" />
     </group>
 
@@ -26,8 +26,7 @@
     <item android:title=""/>
     <item android:title=""/>
     <item android:title=""/>
-    <item android:title="@string/app_by"
-        android:checkable="false" />
+    <item android:title="@string/app_by"/>
     <item android:title="@string/name"/>
 
 </menu>

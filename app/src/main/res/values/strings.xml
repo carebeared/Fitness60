@@ -2,14 +2,13 @@
     <string name="app_name">Fitness60</string>
     <string name="app_name_with_space">Fitness 60</string>
     <string name="app_by">An App made by</string>
-    <string name="name">Shivam Dharme</string>
+    <string name="name">\t\t\t\t\t\t\t\t\tShivam Dharme</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="my_workouts">My Workouts</string>
