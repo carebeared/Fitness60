@@ -14,5 +14,7 @@
         android:layout_marginLeft="70dp"
         android:layout_marginStart="70dp"
         android:layout_marginTop="76dp"
-        android:id="@+id/editText" />
+        android:id="@+id/workout_analysis"
+        android:textAlignment="center"
+        />
 </RelativeLayout>
