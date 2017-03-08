@@ -48,7 +48,12 @@ public class NewWorkout extends Fragment {
 
         TextView toStartWorkout = (TextView) theView.findViewById(R.id.time_start);
         toStartWorkout.setText(finalTime);
+        toStartWorkout.setTextSize(23.0f);
 
+        toStartWorkout.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        ));
 
 
 
@@ -62,13 +67,16 @@ public class NewWorkout extends Fragment {
 
         final ArrayList<Activities> workoutActivities = new ArrayList<Activities>();
         workoutActivities.add(new Activities(container, theView, inflater, getContext(), ++activities));
+        activities++;
         workoutActivities.add(new Activities(container, theView, inflater, getContext(), ++activities));
+        activities++;
 
         Button addActivities = (Button) theView.findViewById(R.id.new_activity);
         addActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 workoutActivities.add(new Activities(container, theView, inflater, getContext(), ++activities));
+                activities++;
             }
         });
 
@@ -103,8 +111,10 @@ class Activities implements View.OnClickListener{
 
     Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum) {
         theContext = aContext;
-
         LinearLayout myView = (LinearLayout) theLayout.findViewById(R.id.layout);
+
+        View c = theInflate.inflate(R.layout.cancel_activity, mainContainer, false);
+        myView.addView(c, activityNum++);
         View n = theInflate.inflate(R.layout.activity_tables, mainContainer, false);
         myView.addView(n, activityNum);
 
@@ -116,7 +126,6 @@ class Activities implements View.OnClickListener{
         myView.addView(newView);
 
         ViewGroup.MarginLayoutParams margins = (ViewGroup.MarginLayoutParams) newView.getLayoutParams();
-        int top = 100;
         margins.setMargins(0, 100, 0, 0);
 
         addSets = (Button) n.findViewById(R.id.add_more_sets);

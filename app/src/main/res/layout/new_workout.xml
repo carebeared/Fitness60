@@ -21,10 +21,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/time_start"
-                android:layout_marginLeft="95dp"
                 android:textColor="?android:attr/colorActivatedHighlight"
                 android:textStyle="italic"
-                android:layout_marginStart="95dp"/>
+                android:textAlignment="center" />
         </LinearLayout>
         
         <LinearLayout
