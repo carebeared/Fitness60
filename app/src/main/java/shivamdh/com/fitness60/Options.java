@@ -16,9 +16,17 @@ import java.util.Timer;
  */
 public class Options extends Fragment {
 
+    public Boolean distanceC;
+    public Boolean weightC;
+    public Boolean timerC;
 
     public Options() {
         // Required empty public constructor
+
+        timerC = true; //timer is default to be on
+        //false reading = 1st option on radio buttons
+        distanceC = false; //default km
+        weightC = false; //default lbs
     }
 
 
@@ -48,10 +56,12 @@ public class Options extends Fragment {
                 switch(checked) {
                     case 0: //first button is selected
                         myToast.setText("Timer On");
+                        timerC = true;
                         myToast.show();
                         break;
                     case 1: //second button is selected
                         myToast.setText("Timer Off");
+                        timerC = false;
                         myToast.show();
                         break;
                 }
@@ -69,10 +79,12 @@ public class Options extends Fragment {
                 switch(checked) {
                     case 0: //first button is selected
                         myToast.setText("Using Kilometers as Distance Units");
+                        distanceC = false;
                         myToast.show();
                         break;
                     case 1: //second button is selected
                         myToast.setText("Using Miles as Distance Units");
+                        distanceC = true;
                         myToast.show();
                         break;
                 }
@@ -90,10 +102,12 @@ public class Options extends Fragment {
                 switch(checked) {
                     case 0: //first button is selected
                         myToast.setText("Measuring in Pounds (lbs)");
+                        weightC = false;
                         myToast.show();
                         break;
                     case 1: //second button is selected
                         myToast.setText("Measuring in Kilograms (kg)");
+                        weightC = true;
                         myToast.show();
                         break;
                 }
