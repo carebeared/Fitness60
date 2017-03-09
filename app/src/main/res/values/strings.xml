@@ -26,6 +26,22 @@
     <string name="lbs">lbs</string>
     <string name="kg">kg</string>
 
+    <string name="set">SET</string>
+    <string name="lbsC">LBS</string>
+    <string name="kgsC">KGS</string>
+    <string name="reps">REPS</string>
+    <string name="timer">TIMER</string>
+    <string name="kmC">KM</string>
+    <string name="milesC">MILES</string>
+    <string name="add_set">ADD SET</string>
+    <string name="remove_set">REMOVE SET</string>
+    <string name="addA">NEW ACTIVITY</string>
+    <string name="removeA">REMOVE LAST ACTIVITY</string>
+    <string name="distanceA">Distance Activity</string>
+    <string name="bodyweightE">Bodyweight Exercise</string>
+
+
+
 
 
 
