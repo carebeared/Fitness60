@@ -28,6 +28,7 @@
 
     <string name="set">SET</string>
     <string name="lbsC">LBS</string>
+    <string name="kgchoice">KGS</string>
     <string name="kgsC">KGS</string>
     <string name="reps">REPS</string>
     <string name="timer">TIMER</string>

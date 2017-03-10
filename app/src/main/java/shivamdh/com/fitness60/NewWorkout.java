@@ -58,6 +58,7 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
 //        n = inflater.inflate(R.layout.activity_tables, container, false);
 //        myView.addView(n);
 
+
         workoutActivities.add(new Activities(container, theView, inflater, getContext(), workoutActivities.size()+1));
         workoutActivities.add(new Activities(container, theView, inflater, getContext(), workoutActivities.size()+1));
 
