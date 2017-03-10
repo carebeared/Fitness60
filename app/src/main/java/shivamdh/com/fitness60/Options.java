@@ -16,17 +16,12 @@ import java.util.Timer;
  */
 public class Options extends Fragment {
 
-    public Boolean distanceC;
-    public Boolean weightC;
-    public Boolean timerC;
+    public static Boolean distanceC = true;
+    public static Boolean weightC = true;
+    public static Boolean timerC = true;
 
     public Options() {
         // Required empty public constructor
-
-        timerC = true; //timer is default to be on
-        //false reading = 1st option on radio buttons
-        distanceC = false; //default km
-        weightC = false; //default lbs
     }
 
 
@@ -39,11 +34,26 @@ public class Options extends Fragment {
         final Toast myToast = Toast.makeText(getContext(), "A toast to type", Toast.LENGTH_SHORT);
 
         RadioButton TimerYes = (RadioButton)myView.findViewById(R.id.TimerYes);
-        TimerYes.setChecked(true);
+        RadioButton TimerNo = (RadioButton)myView.findViewById(R.id.TimerNo);
+        if (timerC) {
+            TimerYes.setChecked(true);
+        } else {
+            TimerNo.setChecked(true);
+        }
         RadioButton TimerKm = (RadioButton)myView.findViewById(R.id.km_unit);
-        TimerKm.setChecked(true);
+        RadioButton TimerMiles = (RadioButton)myView.findViewById(R.id.miles_unit);
+        if (distanceC) {
+            TimerKm.setChecked(true);
+        } else {
+            TimerMiles.setChecked(true);
+        }
         RadioButton TimerLbs = (RadioButton)myView.findViewById(R.id.lbs_unit);
-        TimerLbs.setChecked(true);
+        RadioButton TimerKgs = (RadioButton)myView.findViewById(R.id.kg_unit);
+        if (weightC) {
+            TimerLbs.setChecked(true);
+        } else {
+            TimerKgs.setChecked(true);
+        }
 
         final RadioGroup timer = (RadioGroup) myView.findViewById(R.id.timer_buttons);
 
@@ -79,12 +89,12 @@ public class Options extends Fragment {
                 switch(checked) {
                     case 0: //first button is selected
                         myToast.setText("Using Kilometers as Distance Units");
-                        distanceC = false;
+                        distanceC = true;
                         myToast.show();
                         break;
                     case 1: //second button is selected
                         myToast.setText("Using Miles as Distance Units");
-                        distanceC = true;
+                        distanceC = false;
                         myToast.show();
                         break;
                 }
@@ -102,12 +112,12 @@ public class Options extends Fragment {
                 switch(checked) {
                     case 0: //first button is selected
                         myToast.setText("Measuring in Pounds (lbs)");
-                        weightC = false;
+                        weightC = true;
                         myToast.show();
                         break;
                     case 1: //second button is selected
                         myToast.setText("Measuring in Kilograms (kg)");
-                        weightC = true;
+                        weightC = false;
                         myToast.show();
                         break;
                 }

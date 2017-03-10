@@ -1,6 +1,7 @@
 package shivamdh.com.fitness60;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -14,13 +15,17 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import static shivamdh.com.fitness60.Options.timerC;
+import static shivamdh.com.fitness60.Options.weightC;
+
+
 public class Activities implements View.OnClickListener{
     private Button addSets, removeSets;
 //    public Button deleteActivity;
     private TableRow newRow;
     private Context theContext;
     private EditText sets, reps, weight;
-    private TextView time;
+    private TextView time, weights;
     private String finalTime;
     private int setNumber, firstWeight, firstReps;
     private TableLayout table;
@@ -48,16 +53,22 @@ public class Activities implements View.OnClickListener{
         addSets.setOnClickListener(this);
         removeSets = (Button) n.findViewById(R.id.remove_sets);
         removeSets.setOnClickListener(this);
-//        deleteActivity= (Button) n.findViewById(R.id.delete_activity);
-//        onClick(n);
 
         table = (TableLayout) n.findViewById(R.id.activity1);
         table.setColumnStretchable(0, true);
         table.setColumnStretchable(1, true);
         table.setColumnStretchable(2, true);
-        table.setColumnStretchable(3, true);
+
+        if (!timerC) {
+            TableRow header = (TableRow) n.findViewById(R.id.new_workout_header);
+            header.removeViewAt(3);
+        } else {
+            table.setColumnStretchable(3, true);
+        }
+
         setNumber = 0;
 
+        weights = (TextView) n.findViewById(R.id.weight_text);
         //creating first row
         createRow();
     }
@@ -67,21 +78,29 @@ public class Activities implements View.OnClickListener{
         sets = new EditText(theContext);
         weight = new EditText(theContext);
         reps = new EditText(theContext);
-        time = new TextView(theContext);
         setNumber++;
         sets.setText(Integer.toString(setNumber));
         if (setNumber == 1) {
             createFirstRowOnly();
         }
-        time.setText("00:00");
+
         sets.setGravity(Gravity.CENTER);
         weight.setGravity(Gravity.CENTER);
-        time.setGravity(Gravity.CENTER);
+
+        if (!weightC){
+            weights.setText(R.string.kgchoice);
+        }
         reps.setGravity(Gravity.CENTER);
         newRow.addView(sets);
         newRow.addView(weight);
         newRow.addView(reps);
-        newRow.addView(time);
+
+        if (timerC) {
+            time = new TextView(theContext);
+            time.setText("00:00");
+            time.setGravity(Gravity.CENTER);
+            newRow.addView(time);
+        }
         table.addView(newRow,setNumber);
     }
 
