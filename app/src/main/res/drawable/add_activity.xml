@@ -12,7 +12,7 @@
             android:top="2dp"
             />
         <solid
-            android:color="#ed9b28"
+            android:color="#a96300"
             />
     </shape>
 </item>
