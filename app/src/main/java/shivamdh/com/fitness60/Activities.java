@@ -1,9 +1,11 @@
 package shivamdh.com.fitness60;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,25 +17,43 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static shivamdh.com.fitness60.Options.timerC;
 import static shivamdh.com.fitness60.Options.weightC;
 
 
 public class Activities implements View.OnClickListener{
-    private Button addSets, removeSets;
+    protected Button addSets, removeSets;
 //    public Button deleteActivity;
-    private TableRow newRow;
-    private Context theContext;
-    private EditText sets, reps, weight;
-    private TextView time, weights;
-    private String finalTime;
-    private int setNumber, firstWeight, firstReps;
-    private TableLayout table;
-    private static int howMany = 0;
+    protected TableRow newRow;
+    protected Context theContext;
+    protected EditText sets, reps, weight;
+    protected static TextView time, weights;
+    protected int setNumber, firstWeight, firstReps;
+    protected TableLayout table;
+    public static long start;
+    public Timer setTimer;
+    private Activity ourActivity;
 
-    Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum) {
-        howMany++;
+    public TableLayout getTable () {
+        return table;
+    }
+
+    public int getSetNumber() {
+        return setNumber;
+    }
+
+    public void setTime(TextView givenTime) {
+        time = givenTime;
+    }
+
+    Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity) {
         theContext = aContext;
+        ourActivity = currActivity;
         LinearLayout myView = (LinearLayout) theLayout.findViewById(R.id.layout);
 
         View n = theInflate.inflate(R.layout.activity_tables, mainContainer, false);
@@ -64,6 +84,10 @@ public class Activities implements View.OnClickListener{
             header.removeViewAt(3);
         } else {
             table.setColumnStretchable(3, true);
+            start = System.currentTimeMillis();
+
+            setTimer = new Timer();
+            setTimer.schedule(new runTimer(ourActivity), 1000, 1000);
         }
 
         setNumber = 0;
@@ -71,6 +95,31 @@ public class Activities implements View.OnClickListener{
         weights = (TextView) n.findViewById(R.id.weight_text);
         //creating first row
         createRow();
+
+    }
+
+    public static class runTimer extends TimerTask {
+        private Activity theActivity;
+
+        runTimer(Activity givenActivity){
+            theActivity = givenActivity;
+        }
+
+        @Override
+        public void run() {
+            theActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    long mill = System.currentTimeMillis() - start;
+                    int seconds = (int) (mill/1000 + 1); //account for lag from other methods
+                    int minutes = seconds/60;
+                    seconds = seconds % 60;
+                    Log.d(String.valueOf(minutes), String.valueOf(seconds));
+                    Log.d("FFF", (String) time.getText());
+                    time.setText(String.format("%d:%02d", minutes, seconds));
+                }
+            });
+        }
     }
 
     private void createRow() {
@@ -97,7 +146,8 @@ public class Activities implements View.OnClickListener{
 
         if (timerC) {
             time = new TextView(theContext);
-            time.setText("00:00");
+            time.setText(R.string.defaultTime);
+            start = System.currentTimeMillis();
             time.setGravity(Gravity.CENTER);
             newRow.addView(time);
         }
@@ -170,12 +220,42 @@ public class Activities implements View.OnClickListener{
                 if (setNumber > 0) { //check to not remove the header row
                     table.removeViewAt(setNumber);
                     setNumber--;
+                    if (timerC && setNumber > 0) {
+                        TableRow desiredRow = (TableRow) table.getChildAt(setNumber);
+                        TextView theTimer = (TextView) desiredRow.getChildAt(3);
+
+                        int prevM = getPreviousMins(theTimer.getText());
+                        int prevS = getPreviousSecs(theTimer.getText());
+
+                        time = theTimer;
+                        start = System.currentTimeMillis() - ((prevM*60)+prevS)*1000;
+                        setTimer = new Timer();
+                        setTimer.schedule(new runTimer(ourActivity), 1000, 1000);
+                    }
                 }
                 break;
             default:
                 break;
         }
 
+    }
+
+    public int getPreviousMins (CharSequence oldTimerM) {
+        Pattern p = Pattern.compile("[0-5]?[0-9]:");
+        Matcher m = p.matcher(oldTimerM);
+        m.find();
+        String previousTime = m.group();
+        String minutes = previousTime.substring(0, previousTime.length()-1);
+        return Integer.valueOf(minutes);
+    }
+
+    public int getPreviousSecs (CharSequence oldTimerS) {
+        Pattern s = Pattern.compile(":[0-9][0-9]");
+        Matcher n = s.matcher(oldTimerS);
+        n.find();
+        String prevTimes = n.group();
+        String seconds = prevTimes.substring(1, prevTimes.length());
+        return Integer.valueOf(seconds);
     }
 
 //

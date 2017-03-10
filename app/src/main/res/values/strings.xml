@@ -36,7 +36,7 @@
     <string name="milesC">MILES</string>
     <string name="add_set">ADD SET</string>
     <string name="remove_set">REMOVE SET</string>
-    <string name="addA">NEW ACTIVITY</string>
+    <string name="addA">NEW STANDARD ACTIVITY</string>
     <string name="removeA">REMOVE LAST ACTIVITY</string>
     <string name="distanceA">Distance Activity</string>
     <string name="bodyweightE">Bodyweight Exercise</string>
@@ -49,4 +49,5 @@
 
     <string name="Enter_workout">Enter your new activity</string>
     <string name="starting_workout">Starting Workout at: </string>
+    <string name="defaultTime">00:00</string>
 </resources>
