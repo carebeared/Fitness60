@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -17,6 +19,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Observable;
+import java.util.Timer;
+
+import static shivamdh.com.fitness60.Options.timerC;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,14 +64,19 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
 //        myView.addView(n);
 
 
-        workoutActivities.add(new Activities(container, theView, inflater, getContext(), workoutActivities.size()+1));
-        workoutActivities.add(new Activities(container, theView, inflater, getContext(), workoutActivities.size()+1));
+        workoutActivities.add(new Activities(container, theView, inflater, getContext(), workoutActivities.size()+1, getActivity()));
 
         Button addActivities = (Button) theView.findViewById(R.id.new_activity);
         addActivities.setOnClickListener(this);
 
         Button removeActivities = (Button) theView.findViewById(R.id.remove_last_activity);
         removeActivities.setOnClickListener(this);
+
+        Button distanceActivity = (Button) theView.findViewById(R.id.distance_activity);
+        distanceActivity.setOnClickListener(this);
+
+        Button bodyweight = (Button) theView.findViewById(R.id.bodyweight_exercise);
+        bodyweight.setOnClickListener(this);
 
         workoutTab = (LinearLayout) theView.findViewById(R.id.layout);
 
@@ -77,11 +87,40 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.new_activity:
-                workoutActivities.add(new Activities(currContainer, theView, currInflate, getContext(), workoutActivities.size()+1));
+                if (timerC && workoutActivities.size() > 0) {
+                    workoutActivities.get(workoutActivities.size()-1).setTimer.cancel();
+                }
+                workoutActivities.add(new Activities(currContainer, theView, currInflate, getContext(), workoutActivities.size()+1, getActivity()));
                 break;
             case R.id.remove_last_activity:
-                workoutTab.removeViewAt(workoutActivities.size());
-                workoutActivities.remove(workoutActivities.size() - 1);
+                if (workoutActivities.size() > 0) {
+                    if (timerC) {
+                        if (workoutActivities.size() > 1) {
+
+                            Activities nowLastActivity = workoutActivities.get(workoutActivities.size() - 2);
+
+                            TableLayout getTable = (TableLayout) nowLastActivity.getTable();
+                            TableRow wantedRow = (TableRow) getTable.getChildAt(nowLastActivity.getSetNumber());
+                            TextView resumedTimer = (TextView) wantedRow.getChildAt(3);
+
+                            int previousM = nowLastActivity.getPreviousMins(resumedTimer.getText());
+                            int previousS = nowLastActivity.getPreviousSecs(resumedTimer.getText());
+
+                            nowLastActivity.setTime(resumedTimer);
+                            nowLastActivity.start = System.currentTimeMillis() - ((previousM * 60) + previousS) * 1000;
+                            nowLastActivity.setTimer = new Timer();
+                            nowLastActivity.setTimer.schedule(new Activities.runTimer(getActivity()), 1000, 1000);
+                        }
+                    }
+                    workoutTab.removeViewAt(workoutActivities.size());
+                    workoutActivities.remove(workoutActivities.size() - 1);
+                }
+                break;
+            case R.id.distance_activity:
+//                workoutActivities.add(new DistanceActivity(currContainer, theView, currInflate, getContext(), workoutActivities.size()+1));
+                break;
+            case R.id.bodyweight_exercise:
+
                 break;
             default:
                 break;
