@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/new_activity"
                 android:layout_weight="1"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/add_activity"
                 android:textStyle="normal|italic"
                 android:textSize="20sp"
