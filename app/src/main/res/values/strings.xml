@@ -41,13 +41,10 @@
     <string name="distanceA">Distance Activity</string>
     <string name="bodyweightE">Bodyweight Exercise</string>
 
-
-
-
-
-
-
     <string name="Enter_workout">Enter your new activity</string>
     <string name="starting_workout">Starting Workout at: </string>
     <string name="defaultTime">00:00</string>
+    <string name="weight">Weight</string>
+    <string name="reps_text">Reps</string>
+    <string name="distance_text">Distance</string>
 </resources>

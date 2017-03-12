@@ -17,6 +17,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
@@ -28,35 +29,41 @@ import static shivamdh.com.fitness60.Options.weightC;
 
 public class Activities implements View.OnClickListener{
     protected Button addSets, removeSets;
-//    public Button deleteActivity;
-    protected TableRow newRow;
-    protected Context theContext;
-    protected EditText sets, reps, weight;
-    protected static TextView time, weights;
-    protected int setNumber, firstWeight, firstReps;
-    protected TableLayout table;
-    public static long start;
-    public Timer setTimer;
-    private Activity ourActivity;
+    TableRow newRow;
+    Context theContext;
+    EditText sets, reps;
+    private EditText weight;
+    static TextView time;
+    private static TextView weights;
+    int setNumber, firstReps;
+    private int firstWeight;
+    TableLayout table;
+    static long start;
+    Timer setTimer;
+    protected LinearLayout myView;
+    Activity ourActivity;
+    View n;
 
-    public TableLayout getTable () {
+    TableLayout getTable() {
         return table;
     }
 
-    public int getSetNumber() {
+    int getSetNumber() {
         return setNumber;
     }
 
-    public void setTime(TextView givenTime) {
+    void setTime(TextView givenTime) {
         time = givenTime;
     }
 
-    Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity) {
+    Activities() { } //default constructor used by child classes
+
+    void defaultSetup(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity) {
         theContext = aContext;
         ourActivity = currActivity;
-        LinearLayout myView = (LinearLayout) theLayout.findViewById(R.id.layout);
+        myView = (LinearLayout) theLayout.findViewById(R.id.layout);
 
-        View n = theInflate.inflate(R.layout.activity_tables, mainContainer, false);
+        n = theInflate.inflate(R.layout.activity_tables, mainContainer, false);
         myView.addView(n, activityNum);
 
         LinearLayout newView = new LinearLayout(theContext);
@@ -69,20 +76,30 @@ public class Activities implements View.OnClickListener{
         ViewGroup.MarginLayoutParams margins = (ViewGroup.MarginLayoutParams) newView.getLayoutParams();
         margins.setMargins(0, 100, 0, 0);
 
+        //set the onclick handlers for the buttons
         addSets = (Button) n.findViewById(R.id.add_more_sets);
         addSets.setOnClickListener(this);
         removeSets = (Button) n.findViewById(R.id.remove_sets);
         removeSets.setOnClickListener(this);
 
+        //set some object fields common to all similar classes
         table = (TableLayout) n.findViewById(R.id.activity1);
+        setNumber = 0;
+    }
+
+    Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity) {
+        defaultSetup(mainContainer, theLayout, theInflate, aContext, activityNum, currActivity);
+
+        weights = (TextView) n.findViewById(R.id.weight_text);
+
         table.setColumnStretchable(0, true);
         table.setColumnStretchable(1, true);
         table.setColumnStretchable(2, true);
 
-        if (!timerC) {
+        if (!timerC) { //remove table column if option is selected
             TableRow header = (TableRow) n.findViewById(R.id.new_workout_header);
             header.removeViewAt(3);
-        } else {
+        } else { //keep timer, stretch the column to right size continue timer
             table.setColumnStretchable(3, true);
             start = System.currentTimeMillis();
 
@@ -90,15 +107,11 @@ public class Activities implements View.OnClickListener{
             setTimer.schedule(new runTimer(ourActivity), 1000, 1000);
         }
 
-        setNumber = 0;
-
-        weights = (TextView) n.findViewById(R.id.weight_text);
         //creating first row
         createRow();
-
     }
 
-    public static class runTimer extends TimerTask {
+    static class runTimer extends TimerTask {
         private Activity theActivity;
 
         runTimer(Activity givenActivity){
@@ -115,22 +128,22 @@ public class Activities implements View.OnClickListener{
                     int minutes = seconds/60;
                     seconds = seconds % 60;
                     Log.d(String.valueOf(minutes), String.valueOf(seconds));
-                    Log.d("FFF", (String) time.getText());
-                    time.setText(String.format("%d:%02d", minutes, seconds));
+                    time.setText(String.format(Locale.getDefault(),"%d:%02d", minutes, seconds));
                 }
             });
         }
     }
 
     private void createRow() {
+
         newRow = new TableRow(theContext);
         sets = new EditText(theContext);
         weight = new EditText(theContext);
         reps = new EditText(theContext);
         setNumber++;
-        sets.setText(Integer.toString(setNumber));
+        sets.setText(String.format(Locale.getDefault(), "%d", setNumber));
         if (setNumber == 1) {
-            createFirstRowOnly();
+            createFirstRowOnly(); //special syntax for first row
         }
 
         sets.setGravity(Gravity.CENTER);
@@ -166,7 +179,7 @@ public class Activities implements View.OnClickListener{
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     firstWeight = Integer.parseInt(s.toString());
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }
@@ -187,7 +200,7 @@ public class Activities implements View.OnClickListener{
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     firstReps = Integer.parseInt(s.toString());
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }
@@ -203,17 +216,23 @@ public class Activities implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_more_sets:
-                createRow();
-                //extra applicable only to 2nd row onwards
-                if (firstWeight == 0) {
-                    weight.setHint("Weight");
-                } else {
-                    weight.setText(Integer.toString(firstWeight));
+                if (this.getClass() == Activities.class) {
+                    createRow();
+                } else if (this.getClass() == DistanceActivity.class) {
+                    ((DistanceActivity)this).createDistanceRow();
                 }
-                if (firstReps == 0) {
-                    reps.setHint("Reps");
-                } else {
-                    reps.setText(Integer.toString(firstReps));
+                //extra applicable only to 2nd row onwards
+                if (firstWeight == 0 && this.getClass() == Activities.class) {
+                    weight.setHint(R.string.weight);
+                } else if (this.getClass() == Activities.class) {
+                    weight.setText(String.format(Locale.getDefault(), "%d", firstWeight));
+                }
+                if (firstReps == 0 && this.getClass() == Activities.class) { //polymorphism, base class activity
+                    reps.setHint(R.string.reps_text);
+                } else if (firstReps == 0 && this.getClass() == DistanceActivity.class) { //polymorphism, distance class activity
+                    reps.setHint(R.string.distance_text);
+                } else { //reps/distance were defined, not 0, use that
+                    reps.setText(String.format(Locale.getDefault(), "%d", firstReps));
                 }
                 break;
             case R.id.remove_sets:
@@ -222,7 +241,12 @@ public class Activities implements View.OnClickListener{
                     setNumber--;
                     if (timerC && setNumber > 0) {
                         TableRow desiredRow = (TableRow) table.getChildAt(setNumber);
-                        TextView theTimer = (TextView) desiredRow.getChildAt(3);
+                        TextView theTimer;
+                        if (this.getClass() == DistanceActivity.class) {
+                            theTimer = (TextView) desiredRow.getChildAt(2); //1 less column in distance activity
+                        } else {
+                            theTimer = (TextView) desiredRow.getChildAt(3); //timer in 4th column for base activity
+                        }
 
                         int prevM = getPreviousMins(theTimer.getText());
                         int prevS = getPreviousSecs(theTimer.getText());
@@ -240,29 +264,26 @@ public class Activities implements View.OnClickListener{
 
     }
 
-    public int getPreviousMins (CharSequence oldTimerM) {
+    int getPreviousMins(CharSequence oldTimerM) {
         Pattern p = Pattern.compile("[0-5]?[0-9]:");
         Matcher m = p.matcher(oldTimerM);
-        m.find();
+        if (!m.find()) {
+            return 0;
+        }
         String previousTime = m.group();
         String minutes = previousTime.substring(0, previousTime.length()-1);
         return Integer.valueOf(minutes);
     }
 
-    public int getPreviousSecs (CharSequence oldTimerS) {
+    int getPreviousSecs(CharSequence oldTimerS) {
         Pattern s = Pattern.compile(":[0-9][0-9]");
         Matcher n = s.matcher(oldTimerS);
-        n.find();
+        if (!n.find()) {
+            return 0;
+        }
         String prevTimes = n.group();
         String seconds = prevTimes.substring(1, prevTimes.length());
         return Integer.valueOf(seconds);
     }
 
-//
-//    @Override
-//    public void run() {
-//        SimpleDateFormat time = new SimpleDateFormat("mm:ss", Locale.CANADA);
-//        Calendar theTime = Calendar.getInstance();
-//        finalTime = time.format(theTime.getTime());
-//    }
 }
