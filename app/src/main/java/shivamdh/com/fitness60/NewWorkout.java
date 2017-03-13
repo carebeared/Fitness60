@@ -95,29 +95,31 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
             case R.id.remove_last_activity:
                 if (workoutActivities.size() > 0) {
                     if (timerC) {
-                        if (workoutActivities.size() > 1) {
+                        Activities nowLastActivity = workoutActivities.get(workoutActivities.size() - 2); // about to become the last activity now
+                        if (workoutActivities.size() > 1 && nowLastActivity.setNumber > 0) { //start previous activities timer now, only if there was a timer left
 
-                            Activities nowLastActivity = workoutActivities.get(workoutActivities.size() - 2);
-
-                            TableLayout getTable = (TableLayout) nowLastActivity.getTable();
+                            TableLayout getTable =  nowLastActivity.getTable();
                             TableRow wantedRow = (TableRow) getTable.getChildAt(nowLastActivity.getSetNumber());
-                            TextView resumedTimer = (TextView) wantedRow.getChildAt(3);
+                            TextView resumedTimer = (TextView) wantedRow.getChildAt(3); //get the desired timer textview
 
-                            int previousM = nowLastActivity.getPreviousMins(resumedTimer.getText());
-                            int previousS = nowLastActivity.getPreviousSecs(resumedTimer.getText());
+                            int previousM = nowLastActivity.getPreviousMins(resumedTimer.getText()); //get the previous minutes on timer
+                            int previousS = nowLastActivity.getPreviousSecs(resumedTimer.getText()); //get the previous seconds form the timer
 
-                            nowLastActivity.setTime(resumedTimer);
-                            nowLastActivity.start = System.currentTimeMillis() - ((previousM * 60) + previousS) * 1000;
-                            nowLastActivity.setTimer = new Timer();
+                            nowLastActivity.setTime(resumedTimer); //set the class's timer to the timer last left off
+                            Activities.start = System.currentTimeMillis() - ((previousM * 60) + previousS) * 1000; //set the time of the 'start' var according to previous timer's time
+                            nowLastActivity.setTimer = new Timer(); //have to create a brand new time since last timer was canceled and deleted
                             nowLastActivity.setTimer.schedule(new Activities.runTimer(getActivity()), 1000, 1000);
                         }
                     }
-                    workoutTab.removeViewAt(workoutActivities.size());
-                    workoutActivities.remove(workoutActivities.size() - 1);
+                    workoutTab.removeViewAt(workoutActivities.size()); //safely remove the lass activity
+                    workoutActivities.remove(workoutActivities.size() - 1); //take out the activity from the linkedlist
                 }
                 break;
             case R.id.distance_activity:
-//                workoutActivities.add(new DistanceActivity(currContainer, theView, currInflate, getContext(), workoutActivities.size()+1));
+                if (timerC && workoutActivities.size() > 0) {
+                    workoutActivities.get(workoutActivities.size()-1).setTimer.cancel();
+                }
+                workoutActivities.add(new DistanceActivity(currContainer, theView, currInflate, getContext(), workoutActivities.size()+1, getActivity()));
                 break;
             case R.id.bodyweight_exercise:
 
