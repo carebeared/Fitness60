@@ -29,7 +29,6 @@
     <string name="set">SET</string>
     <string name="lbsC">LBS</string>
     <string name="kgchoice">KGS</string>
-    <string name="kgsC">KGS</string>
     <string name="reps">REPS</string>
     <string name="timer">TIMER</string>
     <string name="kmC">KM</string>
@@ -47,4 +46,6 @@
     <string name="weight">Weight</string>
     <string name="reps_text">Reps</string>
     <string name="distance_text">Distance</string>
+    <string name="dateFormat">HH:mm:ss</string>
+    <string name="addtl_weight">Additional Weight</string>
 </resources>

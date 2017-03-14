@@ -2,7 +2,6 @@ package shivamdh.com.fitness60;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
-import java.util.Observable;
 import java.util.Timer;
 
 import static shivamdh.com.fitness60.Options.timerC;
@@ -28,7 +24,7 @@ import static shivamdh.com.fitness60.Options.timerC;
  */
 public class NewWorkout extends Fragment implements View.OnClickListener {
 
-    private ArrayList<Activities> workoutActivities = new ArrayList<Activities>();
+    private ArrayList<Activities> workoutActivities = new ArrayList<>();
     private LayoutInflater currInflate;
     private ViewGroup currContainer;
     private View theView;
@@ -38,7 +34,6 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,23 +41,13 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
         currInflate = inflater;
         theView = currInflate.inflate(R.layout.new_workout, currContainer, false);
 
-        SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss", Locale.CANADA);
+        SimpleDateFormat time = new SimpleDateFormat(getString(R.string.dateFormat), Locale.CANADA);
         Calendar theTime = Calendar.getInstance();
         String displayTime = time.format(theTime.getTime());
         String finalTime = getString(R.string.starting_workout) + " " + displayTime;
 
         TextView toStartWorkout = (TextView) theView.findViewById(R.id.time_start);
         toStartWorkout.setText(finalTime);
-
-
-//        ViewGroup myView = (ViewGroup) theView.findViewById(R.id.layout);
-        //.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-
-//        View n;
-//
-//        n = inflater.inflate(R.layout.activity_tables, container, false);
-//        myView.addView(n);
-
 
         workoutActivities.add(new Activities(container, theView, inflater, getContext(), workoutActivities.size()+1, getActivity()));
 
@@ -122,7 +107,10 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
                 workoutActivities.add(new DistanceActivity(currContainer, theView, currInflate, getContext(), workoutActivities.size()+1, getActivity()));
                 break;
             case R.id.bodyweight_exercise:
-
+                if (timerC && workoutActivities.size() > 0) {
+                    workoutActivities.get(workoutActivities.size()-1).setTimer.cancel();
+                }
+                workoutActivities.add(new BodyweightExercise(currContainer, theView, currInflate, getContext(), workoutActivities.size()+1, getActivity()));
                 break;
             default:
                 break;

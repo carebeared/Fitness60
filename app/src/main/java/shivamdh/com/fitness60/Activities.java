@@ -128,7 +128,7 @@ public class Activities implements View.OnClickListener{
                     int minutes = seconds/60;
                     seconds = seconds % 60;
                     Log.d(String.valueOf(minutes), String.valueOf(seconds));
-                    time.setText(String.format(Locale.getDefault(),"%d:%02d", minutes, seconds));
+                    time.setText(String.format(Locale.getDefault(), "%d:%02d", minutes, seconds));
                 }
             });
         }
@@ -168,7 +168,7 @@ public class Activities implements View.OnClickListener{
     }
 
     private void createFirstRowOnly() {
-        weight.setHint("Weight"); //only for 1st one
+        weight.setHint(R.string.weight); //only for 1st one
         weight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -189,7 +189,7 @@ public class Activities implements View.OnClickListener{
 
             }
         });
-        reps.setHint("Reps"); //only for 1st one
+        reps.setHint(R.string.reps_text); //only for 1st one
         reps.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

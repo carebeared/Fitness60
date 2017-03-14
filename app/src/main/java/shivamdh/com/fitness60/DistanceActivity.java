@@ -20,21 +20,30 @@ import java.util.Timer;
 
 import static shivamdh.com.fitness60.Options.distanceC;
 import static shivamdh.com.fitness60.Options.timerC;
+import static shivamdh.com.fitness60.Options.weightC;
 
 
 public class DistanceActivity extends Activities {
     private TextView repHeader;
 
-    public DistanceActivity(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity) {
+    DistanceActivity(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity) {
         super(); //just call on a constructor from above
         defaultSetup(mainContainer, theLayout, theInflate, aContext, activityNum, currActivity);
 
         //replace reps from default activity with distance
         repHeader = (TextView) n.findViewById(R.id.reps_text);
-        if (distanceC) {
-            repHeader.setText(R.string.kmC);
-        } else {
-            repHeader.setText(R.string.milesC);
+        if (this.getClass() == DistanceActivity.class) { //check in fact that this is a distance activty
+            if (distanceC) {
+                repHeader.setText(R.string.kmC);
+            } else {
+                repHeader.setText(R.string.milesC);
+            }
+        } else { //meaning this is a bodyweight exercise activity
+            if (weightC) {
+                repHeader.setText(R.string.kgchoice);
+            } else {
+                repHeader.setText(R.string.lbsC);
+            }
         }
 
         TableRow header = (TableRow) n.findViewById(R.id.new_workout_header);
@@ -52,7 +61,7 @@ public class DistanceActivity extends Activities {
         createDistanceRow();
     }
 
-    public void createDistanceRow() {
+    void createDistanceRow() {
         newRow = new TableRow(theContext);
         sets = new EditText(theContext);
         reps = new EditText(theContext);
@@ -79,7 +88,11 @@ public class DistanceActivity extends Activities {
     }
 
     private void createFirstDistanceRowOnly() {
-        reps.setHint("Distance");
+        if (this.getClass() == BodyweightExercise.class) {
+            reps.setHint(R.string.addtl_weight);
+        } else {
+            reps.setHint(R.string.distance_text);
+        }
         reps.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
