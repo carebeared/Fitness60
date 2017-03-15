@@ -2,6 +2,9 @@ package shivamdh.com.fitness60;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,12 +15,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView = null;
     Toolbar toolbar = null;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            android.app.Fragment currentFrag = getFragmentManager().findFragmentByTag("Optionnn");
+            if (currentFrag != null && currentFrag.isVisible()) {
+                Log.d("F", "Made it");
+                Toast aToast = Toast.makeText(getApplicationContext(), "Options saved", Toast.LENGTH_LONG);
+                aToast.show();
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +112,7 @@ public class MainActivity extends AppCompatActivity
             Options fragment = new Options();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "Optionnn");
             fragmentTransaction.commit();
             toolbar.setTitle("Your Options");
         }

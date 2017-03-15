@@ -89,6 +89,7 @@
                 android:textStyle="normal|italic"
                 android:textSize="20sp"
                 android:textColor="#f4f410" />
+
         </LinearLayout>
 
     </LinearLayout>

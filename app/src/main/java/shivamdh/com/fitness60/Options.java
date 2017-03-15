@@ -1,8 +1,12 @@
 package shivamdh.com.fitness60;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
@@ -23,6 +27,21 @@ public class Options extends Fragment {
     public Options() {
         // Required empty public constructor
     }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//
+
+    public static void backPressed(Context appContext) {
+
+        Toast aToast = Toast.makeText(appContext, "Options saved", Toast.LENGTH_LONG);
+        aToast.show();
+    }
+
+
 
 
     @Override
