@@ -2,7 +2,10 @@ package shivamdh.com.fitness60;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,16 +28,51 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d("Ented", "Entered");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            android.app.Fragment currentFrag = getFragmentManager().findFragmentByTag("Optionnn");
-            if (currentFrag != null && currentFrag.isVisible()) {
-                Log.d("F", "Made it");
-                Toast aToast = Toast.makeText(getApplicationContext(), "Options saved", Toast.LENGTH_LONG);
-                aToast.show();
+            View optionFrag = this.findViewById(R.id.options_tab);
+            View workoutFrag = this.findViewById(R.id.myworkout_tab);
+            View analysisFrag = this.findViewById(R.id.analysis_page);
+            View newWorkoutFrag = this.findViewById(R.id.layout);
+            if (optionFrag != null && optionFrag.getVisibility() == View.VISIBLE) {
+                Options.backPressed(getApplicationContext());
+                openHome();
+                return true;
+            } else if (workoutFrag != null && workoutFrag.getVisibility() == View.VISIBLE){
+                MyWorkoutFragment.pressBack(getApplicationContext());
+                openHome();
+                return true;
+            } else if (analysisFrag != null && analysisFrag.getVisibility() == View.VISIBLE) {
+                WorkoutAnalysisFragment.backisPressed(getApplicationContext());
+                openHome();
+                return true;
+            } else if (newWorkoutFrag != null && newWorkoutFrag.getVisibility() == View.VISIBLE) {
+                Log.d("CALL", "SMTH");
+                NewWorkout.MyDialogFragment exitWorkout = new NewWorkout.MyDialogFragment();
+                exitWorkout.show(getSupportFragmentManager(), "M");
+                Log.d("CALL", "SMTH");
+                if (NewWorkout.MyDialogFragment.choice == -1) { //don't save, just exit to main screen
+                    Log.d("MAIN", "NOSAVE");
+                    openHome();
+                    return true;
+                } else if (NewWorkout.MyDialogFragment.choice == 1) { //save and exit
+                    Log.d("MAIN", "SAVE");
+                    openHome();
+                    return true;
+                } else if (NewWorkout.MyDialogFragment.choice == 0) {//choice == 0, cancel exit, stay
+                    Log.d("CAL", "SMTH");
+                    return true;
+                } else {
+                    Log.d("CLL", "SMTH");
+                    return true;
+                }
             }
         }
+        Log.d("CA", "LLED");
         return super.onKeyDown(keyCode, event);
     }
+
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,31 +126,26 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_home) {
-            HomeFragment fragment = new HomeFragment();
-            android.support.v4.app.FragmentTransaction fragmentTransaction =
-                    getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
-            toolbar.setTitle("Fitness60");
+            openHome();
         } else if (id == R.id.nav_workouts) {
             MyWorkoutFragment fragment = new MyWorkoutFragment();
-            android.support.v4.app.FragmentTransaction fragmentTransaction =
+            fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "WorkoutFrag");
             fragmentTransaction.commit();
             toolbar.setTitle("My Workouts");
         } else if (id == R.id.nav_analysis) {
             WorkoutAnalysisFragment fragment = new WorkoutAnalysisFragment();
-            android.support.v4.app.FragmentTransaction fragmentTransaction =
+            fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "AnalysisFrag");
             fragmentTransaction.commit();
             toolbar.setTitle("Workout Analysis");
         } else if (id == R.id.nav_options) {
             Options fragment = new Options();
-            android.support.v4.app.FragmentTransaction fragmentTransaction =
+            fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment, "Optionnn");
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "OptionFrag");
             fragmentTransaction.commit();
             toolbar.setTitle("Your Options");
         }
@@ -120,5 +153,14 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void openHome() {
+        HomeFragment fragment = new HomeFragment();
+        fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment, "HomeFrag");
+        fragmentTransaction.commit();
+        toolbar.setTitle("Fitness60");
     }
 }

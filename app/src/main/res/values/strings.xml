@@ -48,4 +48,5 @@
     <string name="distance_text">Distance</string>
     <string name="dateFormat">HH:mm:ss</string>
     <string name="addtl_weight">Additional Weight</string>
+    <string name="return_home">Returned to Home</string>
 </resources>
