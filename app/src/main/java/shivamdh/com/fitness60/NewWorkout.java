@@ -1,7 +1,14 @@
 package shivamdh.com.fitness60;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +41,45 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
     public NewWorkout() {
         // Required empty public constructor
     }
+
+    public static class MyDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
+        public static int choice;
+
+        public MyDialogFragment() {
+            super();
+            choice = -1000;
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Log.d("CALLLL", "SMTH");
+            return new AlertDialog.Builder(getActivity())
+                    .setMessage("Are you sure?").setPositiveButton("Ok", this)
+                    .setNegativeButton("No way", this).setNeutralButton("Cancel", this).create();
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE :
+                        Log.d("OK", "+ clicked");
+                        choice = 1;
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE :
+                        Log.d("OK", "- clicked");
+                        choice = -1;
+                        break;
+                    case DialogInterface.BUTTON_NEUTRAL :
+                        Log.d("OK", "neutral clicked");
+                        choice = 0;
+                        break;
+                    default:
+                        choice = -1000;
+                        break;
+                }
+            }
+        }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
