@@ -43,39 +43,27 @@ public class NewWorkout extends Fragment implements View.OnClickListener {
     }
 
     public static class MyDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
-        public static int choice;
 
         public MyDialogFragment() {
             super();
-            choice = -1000;
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            Log.d("CALLLL", "SMTH");
             return new AlertDialog.Builder(getActivity())
-                    .setMessage("Are you sure?").setPositiveButton("Ok", this)
-                    .setNegativeButton("No way", this).setNeutralButton("Cancel", this).create();
+                    .setMessage("Workout closed. Would you like to save it??").setPositiveButton("Yes", this)
+                    .setNegativeButton("No", this).create();
         }
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE :
-                        Log.d("OK", "+ clicked");
-                        choice = 1;
                         break;
                     case DialogInterface.BUTTON_NEGATIVE :
-                        Log.d("OK", "- clicked");
-                        choice = -1;
-                        break;
-                    case DialogInterface.BUTTON_NEUTRAL :
-                        Log.d("OK", "neutral clicked");
-                        choice = 0;
                         break;
                     default:
-                        choice = -1000;
                         break;
                 }
             }

@@ -49,4 +49,16 @@
     <string name="dateFormat">HH:mm:ss</string>
     <string name="addtl_weight">Additional Weight</string>
     <string name="return_home">Returned to Home</string>
+    <string name="options_saved">Options saved</string>
+    <string name="timer_option">timer_option</string>
+    <string name="distance_option">distance_option</string>
+    <string name="weight_option">weight_option</string>
+    <string name="random_toast_message">A toast to type</string>
+    <string name="options_data_filename">options_data</string>
+    <string name="timer_on">Timer On</string>
+    <string name="timer_off">Timer Off</string>
+    <string name="km_unit_on">Using Kilometers as Distance Units</string>
+    <string name="miles_unit_on">Using Miles as Distance Units</string>
+    <string name="lbs_unit_on">Measuring in Pounds (lbs)</string>
+    <string name="kg_unit_on">Measuring in Kilograms (kg)</string>
 </resources>

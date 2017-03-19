@@ -47,25 +47,9 @@ public class MainActivity extends AppCompatActivity
                 openHome();
                 return true;
             } else if (newWorkoutFrag != null && newWorkoutFrag.getVisibility() == View.VISIBLE) {
-                Log.d("CALL", "SMTH");
                 NewWorkout.MyDialogFragment exitWorkout = new NewWorkout.MyDialogFragment();
                 exitWorkout.show(getSupportFragmentManager(), "M");
-                Log.d("CALL", "SMTH");
-                if (NewWorkout.MyDialogFragment.choice == -1) { //don't save, just exit to main screen
-                    Log.d("MAIN", "NOSAVE");
-                    openHome();
-                    return true;
-                } else if (NewWorkout.MyDialogFragment.choice == 1) { //save and exit
-                    Log.d("MAIN", "SAVE");
-                    openHome();
-                    return true;
-                } else if (NewWorkout.MyDialogFragment.choice == 0) {//choice == 0, cancel exit, stay
-                    Log.d("CAL", "SMTH");
-                    return true;
-                } else {
-                    Log.d("CLL", "SMTH");
-                    return true;
-                }
+                openHome();
             }
         }
         Log.d("CA", "LLED");
