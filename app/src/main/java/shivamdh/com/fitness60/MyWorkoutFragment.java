@@ -1,5 +1,6 @@
 package shivamdh.com.fitness60;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,8 +26,11 @@ public class MyWorkoutFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
 
-
+    public static void pressBack(Context givenContext) {
+        Toast aToast = Toast.makeText(givenContext, R.string.return_home, Toast.LENGTH_SHORT);
+        aToast.show();
     }
 
     @Override

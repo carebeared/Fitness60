@@ -36,8 +36,7 @@ public class Options extends Fragment {
 //
 
     public static void backPressed(Context appContext) {
-
-        Toast aToast = Toast.makeText(appContext, "Options saved", Toast.LENGTH_LONG);
+        Toast aToast = Toast.makeText(appContext, "Options saved", Toast.LENGTH_SHORT);
         aToast.show();
     }
 
