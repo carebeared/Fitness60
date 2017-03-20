@@ -1,6 +1,7 @@
 package shivamdh.com.fitness60;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -20,57 +21,64 @@ import java.util.Timer;
  */
 public class Options extends Fragment {
 
-    public static Boolean distanceC = true;
-    public static Boolean weightC = true;
-    public static Boolean timerC = true;
+    public static Boolean distanceC;
+    public static Boolean weightC;
+    public static Boolean timerC;
+    RadioButton TimerYes, TimerNo, DistanceKm, DistanceMiles, WeightLbs, WeightKg;
+    private SharedPreferences optionsSelected;
+
 
     public Options() {
-        // Required empty public constructor
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
-//
-//
-
     public static void backPressed(Context appContext) {
-        Toast aToast = Toast.makeText(appContext, "Options saved", Toast.LENGTH_SHORT);
+        Toast aToast = Toast.makeText(appContext, R.string.options_saved, Toast.LENGTH_SHORT);
         aToast.show();
     }
 
-
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editOptionsSaved = optionsSelected.edit();
+        editOptionsSaved.putBoolean(getString(R.string.timer_option), timerC);
+        editOptionsSaved.putBoolean(getString(R.string.distance_option), distanceC);
+        editOptionsSaved.putBoolean(getString(R.string.weight_option), weightC);
+        editOptionsSaved.apply();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View myView = inflater.inflate(R.layout.options, container, false);
+        optionsSelected = getActivity().getSharedPreferences(getString(R.string.options_data_filename), Context.MODE_PRIVATE);
 
-        final Toast myToast = Toast.makeText(getContext(), "A toast to type", Toast.LENGTH_SHORT);
+        timerC = optionsSelected.getBoolean(getString(R.string.timer_option), true);
+        distanceC = optionsSelected.getBoolean(getString(R.string.distance_option), true);
+        weightC = optionsSelected.getBoolean(getString(R.string.weight_option), true);
 
-        RadioButton TimerYes = (RadioButton)myView.findViewById(R.id.TimerYes);
-        RadioButton TimerNo = (RadioButton)myView.findViewById(R.id.TimerNo);
+        final Toast myToast = Toast.makeText(getContext(), R.string.random_toast_message, Toast.LENGTH_SHORT);
+
+        TimerYes = (RadioButton)myView.findViewById(R.id.TimerYes);
+        TimerNo = (RadioButton)myView.findViewById(R.id.TimerNo);
         if (timerC) {
             TimerYes.setChecked(true);
         } else {
             TimerNo.setChecked(true);
         }
-        RadioButton TimerKm = (RadioButton)myView.findViewById(R.id.km_unit);
-        RadioButton TimerMiles = (RadioButton)myView.findViewById(R.id.miles_unit);
+        DistanceKm = (RadioButton)myView.findViewById(R.id.km_unit);
+        DistanceMiles = (RadioButton)myView.findViewById(R.id.miles_unit);
         if (distanceC) {
-            TimerKm.setChecked(true);
+            DistanceKm.setChecked(true);
         } else {
-            TimerMiles.setChecked(true);
+            DistanceMiles.setChecked(true);
         }
-        RadioButton TimerLbs = (RadioButton)myView.findViewById(R.id.lbs_unit);
-        RadioButton TimerKgs = (RadioButton)myView.findViewById(R.id.kg_unit);
+        WeightLbs = (RadioButton)myView.findViewById(R.id.lbs_unit);
+        WeightKg = (RadioButton)myView.findViewById(R.id.kg_unit);
         if (weightC) {
-            TimerLbs.setChecked(true);
+            WeightLbs.setChecked(true);
         } else {
-            TimerKgs.setChecked(true);
+            WeightKg.setChecked(true);
         }
 
         final RadioGroup timer = (RadioGroup) myView.findViewById(R.id.timer_buttons);
@@ -83,12 +91,12 @@ public class Options extends Fragment {
 
                 switch(checked) {
                     case 0: //first button is selected
-                        myToast.setText("Timer On");
+                        myToast.setText(R.string.timer_on);
                         timerC = true;
                         myToast.show();
                         break;
                     case 1: //second button is selected
-                        myToast.setText("Timer Off");
+                        myToast.setText(R.string.timer_off);
                         timerC = false;
                         myToast.show();
                         break;
@@ -106,12 +114,12 @@ public class Options extends Fragment {
 
                 switch(checked) {
                     case 0: //first button is selected
-                        myToast.setText("Using Kilometers as Distance Units");
+                        myToast.setText(R.string.km_unit_on);
                         distanceC = true;
                         myToast.show();
                         break;
                     case 1: //second button is selected
-                        myToast.setText("Using Miles as Distance Units");
+                        myToast.setText(R.string.miles_unit_on);
                         distanceC = false;
                         myToast.show();
                         break;
@@ -129,12 +137,12 @@ public class Options extends Fragment {
 
                 switch(checked) {
                     case 0: //first button is selected
-                        myToast.setText("Measuring in Pounds (lbs)");
+                        myToast.setText(R.string.lbs_unit_on);
                         weightC = true;
                         myToast.show();
                         break;
                     case 1: //second button is selected
-                        myToast.setText("Measuring in Kilograms (kg)");
+                        myToast.setText(R.string.kg_unit_on);
                         weightC = false;
                         myToast.show();
                         break;
