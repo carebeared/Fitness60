@@ -52,12 +52,17 @@ public class DistanceActivity extends Activities {
         //set the columns to correct widths
         table.setColumnStretchable(0, true);
         table.setColumnStretchable(1, true);
-        table.setColumnStretchable(2, true);
 
-        start = System.currentTimeMillis();
-        setTimer = new Timer();
-        setTimer.schedule(new runTimer(ourActivity), 1000, 1000);
+        if (!timerC) { //remove table column if option is selected
+            header.removeViewAt(2);
+        } else { //keep timer, stretch the column to right size continue timer
+            table.setColumnStretchable(2, true);
+            start = System.currentTimeMillis();
 
+            start = System.currentTimeMillis();
+            setTimer = new Timer();
+            setTimer.schedule(new runTimer(ourActivity), 1000, 1000);
+        }
         createDistanceRow();
     }
 
@@ -88,11 +93,8 @@ public class DistanceActivity extends Activities {
     }
 
     private void createFirstDistanceRowOnly() {
-        if (this.getClass() == BodyweightExercise.class) {
-            reps.setHint(R.string.addtl_weight);
-        } else {
-            reps.setHint(R.string.distance_text);
-        }
+        reps.setHint(R.string.distance_text);
+
         reps.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

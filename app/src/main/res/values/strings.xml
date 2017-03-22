@@ -47,7 +47,7 @@
     <string name="reps_text">Reps</string>
     <string name="distance_text">Distance</string>
     <string name="dateFormat">HH:mm:ss</string>
-    <string name="addtl_weight">Additional Weight</string>
+    <string name="addtl_weight">+BodyWeight</string>
     <string name="return_home">Returned to Home</string>
     <string name="options_saved">Options saved</string>
     <string name="timer_option">timer_option</string>
