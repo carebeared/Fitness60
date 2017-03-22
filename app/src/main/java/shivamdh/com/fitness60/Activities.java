@@ -2,6 +2,7 @@ package shivamdh.com.fitness60;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ import java.util.regex.Pattern;
 
 import static shivamdh.com.fitness60.Options.timerC;
 import static shivamdh.com.fitness60.Options.weightC;
+import static shivamdh.com.fitness60.Options.distanceC;
 
 
 public class Activities implements View.OnClickListener{
@@ -43,6 +45,8 @@ public class Activities implements View.OnClickListener{
     protected LinearLayout myView;
     Activity ourActivity;
     View n;
+    private SharedPreferences optionsSelected;
+    private Boolean activityType;
 
     TableLayout getTable() {
         return table;
@@ -87,14 +91,17 @@ public class Activities implements View.OnClickListener{
         setNumber = 0;
     }
 
-    Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity) {
+    Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity, Boolean type) {
         defaultSetup(mainContainer, theLayout, theInflate, aContext, activityNum, currActivity);
+        activityType = type;
 
         weights = (TextView) n.findViewById(R.id.weight_text);
 
         table.setColumnStretchable(0, true);
         table.setColumnStretchable(1, true);
         table.setColumnStretchable(2, true);
+
+        Options.setVariables(ourActivity);
 
         if (!timerC) { //remove table column if option is selected
             TableRow header = (TableRow) n.findViewById(R.id.new_workout_header);
@@ -107,8 +114,17 @@ public class Activities implements View.OnClickListener{
             setTimer.schedule(new runTimer(ourActivity), 1000, 1000);
         }
 
+        optionsSelected = ourActivity.getSharedPreferences(ourActivity.getString(R.string.options_data_filename), Context.MODE_PRIVATE);
+
+        timerC = optionsSelected.getBoolean(ourActivity.getString(R.string.timer_option), true);
+        distanceC = optionsSelected.getBoolean(ourActivity.getString(R.string.distance_option), true);
+        weightC = optionsSelected.getBoolean(ourActivity.getString(R.string.weight_option), true);
+
         //creating first row
         createRow();
+
+
+
     }
 
     static class runTimer extends TimerTask {
@@ -123,12 +139,14 @@ public class Activities implements View.OnClickListener{
             theActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    long mill = System.currentTimeMillis() - start;
-                    int seconds = (int) (mill/1000 + 1); //account for lag from other methods
-                    int minutes = seconds/60;
-                    seconds = seconds % 60;
-                    Log.d(String.valueOf(minutes), String.valueOf(seconds));
-                    time.setText(String.format(Locale.getDefault(), "%d:%02d", minutes, seconds));
+                    if (timerC) {
+                        long mill = System.currentTimeMillis() - start;
+                        int seconds = (int) (mill / 1000 + 1); //account for lag from other methods
+                        int minutes = seconds / 60;
+                        seconds = seconds % 60;
+                        Log.d(String.valueOf(minutes), String.valueOf(seconds));
+                        time.setText(String.format(Locale.getDefault(), "%d:%02d", minutes, seconds));
+                    }
                 }
             });
         }
@@ -167,8 +185,14 @@ public class Activities implements View.OnClickListener{
         table.addView(newRow,setNumber);
     }
 
+
+
     private void createFirstRowOnly() {
-        weight.setHint(R.string.weight); //only for 1st one
+        if (!activityType) {
+            weight.setHint(R.string.addtl_weight);
+        } else {
+            weight.setHint(R.string.weight); //only for 1st one
+        }
         weight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

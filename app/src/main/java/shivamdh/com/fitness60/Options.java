@@ -1,5 +1,6 @@
 package shivamdh.com.fitness60;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,16 +17,13 @@ import android.widget.Toast;
 
 import java.util.Timer;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Options extends Fragment {
 
     public static Boolean distanceC;
     public static Boolean weightC;
     public static Boolean timerC;
     RadioButton TimerYes, TimerNo, DistanceKm, DistanceMiles, WeightLbs, WeightKg;
-    private SharedPreferences optionsSelected;
+    private static SharedPreferences optionsSelected;
 
 
     public Options() {
@@ -46,16 +44,22 @@ public class Options extends Fragment {
         editOptionsSaved.apply();
     }
 
+    public static void setVariables(Activity givenActivity) {
+
+        optionsSelected = givenActivity.getSharedPreferences(givenActivity.getString(R.string.options_data_filename), Context.MODE_PRIVATE);
+
+        timerC = optionsSelected.getBoolean(givenActivity.getString(R.string.timer_option), true);
+        distanceC = optionsSelected.getBoolean(givenActivity.getString(R.string.distance_option), true);
+        weightC = optionsSelected.getBoolean(givenActivity.getString(R.string.weight_option), true);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View myView = inflater.inflate(R.layout.options, container, false);
-        optionsSelected = getActivity().getSharedPreferences(getString(R.string.options_data_filename), Context.MODE_PRIVATE);
 
-        timerC = optionsSelected.getBoolean(getString(R.string.timer_option), true);
-        distanceC = optionsSelected.getBoolean(getString(R.string.distance_option), true);
-        weightC = optionsSelected.getBoolean(getString(R.string.weight_option), true);
+        setVariables(getActivity());
 
         final Toast myToast = Toast.makeText(getContext(), R.string.random_toast_message, Toast.LENGTH_SHORT);
 
