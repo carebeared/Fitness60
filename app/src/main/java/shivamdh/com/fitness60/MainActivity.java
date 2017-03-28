@@ -2,6 +2,7 @@ package shivamdh.com.fitness60;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.d("Ented", "Entered");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             View optionFrag = this.findViewById(R.id.options_tab);
             View workoutFrag = this.findViewById(R.id.myworkout_tab);
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity
                 openHome();
             }
         }
-        Log.d("CA", "LLED");
         return super.onKeyDown(keyCode, event);
     }
 
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Fitness60");
+        toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -113,25 +112,26 @@ public class MainActivity extends AppCompatActivity
             openHome();
         } else if (id == R.id.nav_workouts) {
             MyWorkoutFragment fragment = new MyWorkoutFragment();
+            fragment.setTheContext(getApplicationContext());
             fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment, "WorkoutFrag");
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
-            toolbar.setTitle("My Workouts");
+            toolbar.setTitle(R.string.my_workouts);
         } else if (id == R.id.nav_analysis) {
             WorkoutAnalysisFragment fragment = new WorkoutAnalysisFragment();
             fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment, "AnalysisFrag");
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
-            toolbar.setTitle("Workout Analysis");
+            toolbar.setTitle(R.string.workout_analysis);
         } else if (id == R.id.nav_options) {
             Options fragment = new Options();
             fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment, "OptionFrag");
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
-            toolbar.setTitle("Your Options");
+            toolbar.setTitle(R.string.options);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -143,8 +143,8 @@ public class MainActivity extends AppCompatActivity
         HomeFragment fragment = new HomeFragment();
         fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment, "HomeFrag");
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
-        toolbar.setTitle("Fitness60");
+        toolbar.setTitle(R.string.app_name);
     }
 }
