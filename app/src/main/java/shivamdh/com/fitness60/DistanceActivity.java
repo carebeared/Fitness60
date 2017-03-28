@@ -71,8 +71,8 @@ public class DistanceActivity extends Activities {
         sets = new EditText(theContext);
         reps = new EditText(theContext);
         setNumber++;
-        sets.setText(String.format(Locale.getDefault(), "%d", setNumber));
-        if (setNumber == 1) {
+        sets.setText(String.format(Locale.getDefault(), "%d", setNumber-1));
+        if (setNumber == 2) {
             createFirstDistanceRowOnly(); //special syntax for first row only
         }
 
