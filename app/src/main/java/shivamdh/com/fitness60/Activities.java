@@ -48,10 +48,6 @@ public class Activities implements View.OnClickListener{
     private SharedPreferences optionsSelected;
     private Boolean activityType;
 
-    TableLayout getTable() {
-        return table;
-    }
-
     int getSetNumber() {
         return setNumber;
     }
@@ -88,7 +84,7 @@ public class Activities implements View.OnClickListener{
 
         //set some object fields common to all similar classes
         table = (TableLayout) n.findViewById(R.id.activity1);
-        setNumber = 0;
+        setNumber = 1;
     }
 
     Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity, Boolean type) {
@@ -159,8 +155,8 @@ public class Activities implements View.OnClickListener{
         weight = new EditText(theContext);
         reps = new EditText(theContext);
         setNumber++;
-        sets.setText(String.format(Locale.getDefault(), "%d", setNumber));
-        if (setNumber == 1) {
+        sets.setText(String.format(Locale.getDefault(), "%d", setNumber-1));
+        if (setNumber == 2) {
             createFirstRowOnly(); //special syntax for first row
         }
 
