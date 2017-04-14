@@ -29,26 +29,32 @@ import static shivamdh.com.fitness60.Options.weightC;
 import static shivamdh.com.fitness60.Options.distanceC;
 
 
-public class Activities implements View.OnClickListener{
-    protected Button addSets, removeSets;
-    TableRow newRow;
-    Context theContext;
-    EditText sets, reps;
-    private EditText weight;
-    static TextView time;
-    private static TextView weights;
-    int setNumber, firstReps;
-    private int firstWeight;
-    TableLayout table;
-    static long start;
-    Timer setTimer;
-    protected LinearLayout myView;
-    Activity ourActivity;
-    View n;
-    private SharedPreferences optionsSelected;
-    private Boolean activityType;
+/*
+This class pertains to the Activites tab within the app, used to communicate with the internal database as well as UI to provide
+a smooth rendering of how a user sees their data recorded and stored during workouts. The main fragment that this class runs on is the 
+activity_main layout xml file. This class pertains to the standard activity a user may use while DistanceActivity (a subclass of this)
+is for specific distance related activities within workouts
+*/
 
-    int getSetNumber() {
+public class Activities implements View.OnClickListener{
+    Context theContext; //the provided app context within which the class runs on 
+    protected LinearLayout myView; //provided linear layout under which the app and fragment operates within
+    Activity ourActivity; //the app activity
+    View n; //the app view, used to inflate the layout and table
+    protected Button addSets, removeSets; //buttons at the bottom of each tab for set manipulation
+    TableLayout table; //each set's table 
+    TableRow newRow; 
+    EditText sets, reps, weight; //each row's column 
+    static TextView time; //each row may contain a timer (depending on settings)
+    private static TextView weights; //the weights header column (changes display units depending on user options)
+    int setNumber, firstReps;
+    private int firstWeight; //keep a track of the first set's weight, used to copy that into other sets
+    static long start; //long number for timer start and stop 
+    Timer setTimer;
+    private SharedPreferences optionsSelected; //user preferences from the options tab in the app
+    private Boolean activityType; //what kind of activity is selected by the user to deploy
+
+    int getSetNumber() { 
         return setNumber;
     }
 
@@ -63,9 +69,10 @@ public class Activities implements View.OnClickListener{
         ourActivity = currActivity;
         myView = (LinearLayout) theLayout.findViewById(R.id.layout);
 
+		//inflate the layout for the table and set boundary paramters
         n = theInflate.inflate(R.layout.activity_tables, mainContainer, false);
         myView.addView(n, activityNum);
-
+		
         LinearLayout newView = new LinearLayout(theContext);
         newView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -87,8 +94,9 @@ public class Activities implements View.OnClickListener{
         setNumber = 1;
     }
 
+	//custom constructor, used when deploying the basic activity type
     Activities(ViewGroup mainContainer, View theLayout, LayoutInflater theInflate, Context aContext, int activityNum, Activity currActivity, Boolean type) {
-        defaultSetup(mainContainer, theLayout, theInflate, aContext, activityNum, currActivity);
+        defaultSetup(mainContainer, theLayout, theInflate, aContext, activityNum, currActivity); //user a default setup function that all types of activities use
         activityType = type;
 
         weights = (TextView) n.findViewById(R.id.weight_text);
@@ -112,18 +120,16 @@ public class Activities implements View.OnClickListener{
 
         optionsSelected = ourActivity.getSharedPreferences(ourActivity.getString(R.string.options_data_filename), Context.MODE_PRIVATE);
 
+		//get user 'shered preferences' from the options tab, otherwise set all booleans to true
         timerC = optionsSelected.getBoolean(ourActivity.getString(R.string.timer_option), true);
         distanceC = optionsSelected.getBoolean(ourActivity.getString(R.string.distance_option), true);
         weightC = optionsSelected.getBoolean(ourActivity.getString(R.string.weight_option), true);
 
         //creating first row
         createRow();
-
-
-
     }
 
-    static class runTimer extends TimerTask {
+    static class runTimer extends TimerTask { //class used to handle timer handler
         private Activity theActivity;
 
         runTimer(Activity givenActivity){
@@ -131,24 +137,24 @@ public class Activities implements View.OnClickListener{
         }
 
         @Override
-        public void run() {
-            theActivity.runOnUiThread(new Runnable() {
+        public void run() { //timer handler
+            theActivity.runOnUiThread(new Runnable() { //ensure timer runs on UI thread, to allow for multi-core processing with the timer being shown on UI
                 @Override
                 public void run() {
                     if (timerC) {
-                        long mill = System.currentTimeMillis() - start;
-                        int seconds = (int) (mill / 1000 + 1); //account for lag from other methods
+                        long mill = System.currentTimeMillis() - start; //calc milliseconds from when the timer was started
+                        int seconds = (int) (mill / 1000 + 1); 
                         int minutes = seconds / 60;
                         seconds = seconds % 60;
                         Log.d(String.valueOf(minutes), String.valueOf(seconds));
-                        time.setText(String.format(Locale.getDefault(), "%d:%02d", minutes, seconds));
+                        time.setText(String.format(Locale.getDefault(), "%d:%02d", minutes, seconds)); //convert and show the final times
                     }
                 }
             });
         }
     }
 
-    private void createRow() {
+    private void createRow() { //function for creating rows for the activity
 
         newRow = new TableRow(theContext);
         sets = new EditText(theContext);
@@ -157,9 +163,10 @@ public class Activities implements View.OnClickListener{
         setNumber++;
         sets.setText(String.format(Locale.getDefault(), "%d", setNumber-1));
         if (setNumber == 2) {
-            createFirstRowOnly(); //special syntax for first row
+            createFirstRowOnly(); //special syntax for first row, regarding edit text listeners
         }
 
+		//edit text setup and new row rendering code
         sets.setGravity(Gravity.CENTER);
         weight.setGravity(Gravity.CENTER);
 
@@ -171,7 +178,7 @@ public class Activities implements View.OnClickListener{
         newRow.addView(weight);
         newRow.addView(reps);
 
-        if (timerC) {
+        if (timerC) { //check if timer option has been selected by the user
             time = new TextView(theContext);
             time.setText(R.string.defaultTime);
             start = System.currentTimeMillis();
@@ -181,14 +188,14 @@ public class Activities implements View.OnClickListener{
         table.addView(newRow,setNumber);
     }
 
-
-
     private void createFirstRowOnly() {
-        if (!activityType) {
+        if (!activityType) { //check for activity type, change edit text hints accordingly
             weight.setHint(R.string.addtl_weight);
         } else {
             weight.setHint(R.string.weight); //only for 1st one
         }
+		
+		//Edit Text Listeners used to predict user's second set and onwards setting by finding out what oarameters they entered in the first set
         weight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -233,10 +240,10 @@ public class Activities implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v) { //button on click listeners for add/remove sets
         switch (v.getId()) {
             case R.id.add_more_sets:
-                if (this.getClass() == Activities.class) {
+                if (this.getClass() == Activities.class) { //polymorphism adaptation, check what kind of class so that appropriate method is run
                     createRow();
                 } else if (this.getClass() == DistanceActivity.class) {
                     ((DistanceActivity)this).createDistanceRow();
@@ -256,10 +263,10 @@ public class Activities implements View.OnClickListener{
                 }
                 break;
             case R.id.remove_sets:
-                if (setNumber > 0) { //check to not remove the header row
+                if (setNumber > 0) { //check to make sure to not remove the header row
                     table.removeViewAt(setNumber);
                     setNumber--;
-                    if (timerC && setNumber > 0) {
+                    if (timerC && setNumber > 0) { //resume last set timer if timers are selected
                         TableRow desiredRow = (TableRow) table.getChildAt(setNumber);
                         TextView theTimer;
                         if (this.getClass() == DistanceActivity.class) {
@@ -268,11 +275,11 @@ public class Activities implements View.OnClickListener{
                             theTimer = (TextView) desiredRow.getChildAt(3); //timer in 4th column for base activity
                         }
 
-                        int prevM = getPreviousMins(theTimer.getText());
-                        int prevS = getPreviousSecs(theTimer.getText());
+                        int prevM = getPreviousMins(theTimer.getText()); //previous timer's minutes 
+                        int prevS = getPreviousSecs(theTimer.getText()); //previous timer's seconds
 
                         time = theTimer;
-                        start = System.currentTimeMillis() - ((prevM*60)+prevS)*1000;
+                        start = System.currentTimeMillis() - ((prevM*60)+prevS)*1000; //adjust the timer start accordingly
                         setTimer = new Timer();
                         setTimer.schedule(new runTimer(ourActivity), 1000, 1000);
                     }
@@ -284,7 +291,7 @@ public class Activities implements View.OnClickListener{
 
     }
 
-    int getPreviousMins(CharSequence oldTimerM) {
+    int getPreviousMins(CharSequence oldTimerM) { //get the previous timer's minutes using regex expressions
         Pattern p = Pattern.compile("[0-5]?[0-9]:");
         Matcher m = p.matcher(oldTimerM);
         if (!m.find()) {
@@ -295,7 +302,7 @@ public class Activities implements View.OnClickListener{
         return Integer.valueOf(minutes);
     }
 
-    int getPreviousSecs(CharSequence oldTimerS) {
+    int getPreviousSecs(CharSequence oldTimerS) {//get the previous timer's seconds using regex expressions
         Pattern s = Pattern.compile(":[0-9][0-9]");
         Matcher n = s.matcher(oldTimerS);
         if (!n.find()) {
