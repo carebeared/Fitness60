@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
+/*
+This is the home page of the app, future designs include some functionality regarding past activity and preferences
+Currently, it is a filler app page that is not used to its full extent
  */
 public class HomeFragment extends Fragment {
-
 
     public HomeFragment() {
         // Required empty public constructor

@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
+/*
+A class to be utlized later for displaying the user's past activity and giving some feedback and analysis on that
+Currently, it is still in progress and serves only as a filler app page for what is to come
  */
 public class WorkoutAnalysisFragment extends Fragment {
 
