@@ -16,6 +16,7 @@ public class WorkoutActivityDatabase {
     private SQLiteDatabase mDatabase;
     private DatabaseHelper DbHelper;
 
+	//get list of column names from helper claas
     private String[] ActivityColumns1 = {
             DatabaseHelper.COL6,
             DatabaseHelper.COL2_1,
@@ -30,6 +31,7 @@ public class WorkoutActivityDatabase {
     TextView timer;
     Boolean TableType;
 
+	//store inputted parameters in constructor and try and open/create the database
     public WorkoutActivityDatabase(Context givenContext, Boolean type, TableLayout givenTable) {
         theContext = givenContext;
         DbHelper = new DatabaseHelper(theContext);
@@ -43,6 +45,7 @@ public class WorkoutActivityDatabase {
         }
     }
 
+	//data insertion follows a similar pattern to how it was stored
     public void insertDataType (int weight, int reps, String timer) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.COL2_1, weight);
@@ -71,7 +74,7 @@ public class WorkoutActivityDatabase {
             String weight_or_distance_text = weight_or_distance.getText().toString();
             String reps_or_nothing_text;
 
-            if (TableType) {
+            if (TableType) { //check what kind of data was stored (distance vs regular activity)
                 reps_or_nothing = (EditText) theRow.getChildAt(2);
                 reps_or_nothing_text = reps_or_nothing.getText().toString();
                 timer = (TextView) theRow.getChildAt(3);
@@ -80,6 +83,7 @@ public class WorkoutActivityDatabase {
                 timer = (TextView) theRow.getChildAt(2);
             }
 
+			//get data and transfer it to usable data types
             String timerText = timer.getText().toString();
             int weightORtextNUM, repsORnothingNUM;
             try {
@@ -98,7 +102,7 @@ public class WorkoutActivityDatabase {
 
     }
 
-    public Cursor getAllData() {
+    public Cursor getAllData() { //get the data from the database
         Cursor resultTable;
         resultTable = mDatabase.rawQuery("select * from " + DatabaseHelper.TABLE_NAME, null);
         return resultTable;

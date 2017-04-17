@@ -23,6 +23,12 @@ import static shivamdh.com.fitness60.Options.timerC;
 import static shivamdh.com.fitness60.Options.weightC;
 
 
+/*
+The main java file used to correspond with the advanced distance activity, this activity is based on a distance-related activity and thus
+contains different parameters for user to input, record and store. A similar layout is still used for the tables yet the data is stored 
+differenty within the database 
+ */
+
 public class DistanceActivity extends Activities {
     private TextView repHeader;
 
@@ -81,7 +87,7 @@ public class DistanceActivity extends Activities {
         newRow.addView(sets);
         newRow.addView(reps);
 
-        if (timerC) {
+        if (timerC) { //add the timer column if user options selected permits
             time = new TextView(theContext);
             time.setText(R.string.defaultTime);
             start = System.currentTimeMillis();
@@ -91,10 +97,13 @@ public class DistanceActivity extends Activities {
         table.addView(newRow,setNumber);
 
     }
-
-    private void createFirstDistanceRowOnly() {
+	
+	//creating the first row is different than other rows as user input is collected for faster use when creating multiple rows
+    private void createFirstDistanceRowOnly() { 
         reps.setHint(R.string.distance_text);
-
+		
+		//text watchers for the edit text regarding reps only (no weights in distance related activity)
+		//recorded and then displayed for future rows in case same info applies
         reps.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
