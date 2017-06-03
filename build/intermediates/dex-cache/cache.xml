@@ -2,139 +2,121 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\transition\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.1.0_6ade8349b892601080c2783c09d12e7ebacfb099\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.1.0_23a0cee874dc6d8f597aeca43a6b0c772cd9a7c7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="3e93fcf69e31f2288ca35e8f6b3e25ed1ea14b46">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_e6f4b4a541237028e58c8d4d18655ee275fd7cdf\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.1.0_23b5df9c9b7efbd3e4de29109f40a994dcee304d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\design\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.1.0_2c9f81ebaa28b4c1224e01cc448deb375ff2f5d7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.1.0_046fab8ec01633bc33146b3290dd69bf6ae06ec5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="aee64634871d88a419d59eb743c1258a60f19700">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.1.0_e42bd170b1530523cc8a0f8a07f3e18047a9b4cd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.1.0_5c411ece2faf7ba23bbe067242b334ab2f5a1410\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="cdab6e66aa7cf2af3486608fe0336699c98b655d">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_2d518ac552f851382bcb9e8aa112fcf8cc1dbf64\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.0\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.0\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.1.0_8328efc370723913e8f8ce31473d2eafa94813c1\classes.dex" />
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.1.0_2008920c3be46253abf7b0bfa07ee75d3251960c.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.1.0_cb14218519c07c3cfd9edf6fc168a2a7cb64e43c\classes.dex" />
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.1.0_b88897eba17c15a6f13387845b553b11cd303d79.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.0\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.0_4ffcbb3c92db89036e66a942c3f395fe4e46f0fd\classes.dex" />
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.1.0_3ae8207e4e8240a41092e92b44e14b2abf1b93f5.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.0\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.1.0_1823a48f70b633051bed3e7123170aa4fdcf866f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\transition\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.1.0_907d2ded7b469fe22a57d708e756adec3d4887fd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\design\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.1.0_6db4d1305d80084c0ee87607714a5d07285f53a0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.0\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.1.0_7f1620236c82feb62cae51d75d017dbddc84af2f\classes.dex" />
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.1.0_2bf9494e002c1e40cbe03d95ddb83902bb4bf30c.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.0\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.0\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.1.0_69816273b5a4b06afac6d9d916ab86dbdf3ba20c\classes.dex" />
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.1.0_32c4fec7c0bec6565dfb27b37b28c58457f6ed8d.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.0\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.1.0_d7e98b4be327eb7c08b9b96d1390678521f3e0fb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Monaco\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\support-annotations-25.1.0_3497afc50440114299df62aed8240044d307fa32.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.0\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
-        <dex dex="C:\Users\sd082\AndroidStudioProjects\Fitness60\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.1.0_d54f442d508ae28a7ffcede83702543e727e0e42\classes.dex" />
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.1.0_6f5bd0d86741cc687a0c3658a30cbe0cc8cbae03.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.1.0_e26bfe40c7c14deaf06ea44a4d83ada774c0a3a8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="C:\Users\Monaco\Documents\GitHub\Fitness60\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.1.0_fc90e14549e0ba17b19e2c3de34712c2de1afac6.jar" />
     </item>
 
 </items>

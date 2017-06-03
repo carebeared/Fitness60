@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
  
     private void openHome() { //private method used to render the home page, used often on back button pressed or home selection
         HomeFragment fragment = new HomeFragment();
